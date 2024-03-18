@@ -1,0 +1,157 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Challenge API - RQ",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Registro"
+                ],
+                "summary": "Regitrar un nuevo usuario",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nombre del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Correo Electrónico",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña de Usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Verificar Contraseña de Usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Usuario registrado correctamente"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Iniciar Sesión"
+                ],
+                "summary": "Iniciar sesion con usuario registrado",
+                "operationId": "8dcb70df1020986038d098cc08d05dae",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Correo Electrónico",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Contraseña de Usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Token obtenido"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        },
+        "/api/auth/user-profile": {
+            "get": {
+                "tags": [
+                    "Perfil de Usuario Registrado"
+                ],
+                "summary": "Perfil de Usuario Actual",
+                "operationId": "4188c99fa2637f92b254e6526b44fc50",
+                "responses": {
+                    "200": {
+                        "description": "Retorna el perfil de usuarios"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/system/users": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Obtener lista de Usuarios",
+                "operationId": "167fa681c30faddde1c3a1876cf43e84",
+                "responses": {
+                    "200": {
+                        "description": "Retorna lista de usuarios"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
