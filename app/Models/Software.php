@@ -11,7 +11,7 @@ class Software extends Model
     use HasFactory;
 
     public $table = 'software';
-    protected $fillable = ['sku', 'name', 'price', 'serial'];
+    protected $fillable = ['sku', 'name', 'price','id_so', 'serial'];
 
     protected static function boot()
 
